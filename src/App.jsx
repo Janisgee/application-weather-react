@@ -6,7 +6,7 @@ export default function App() {
     <div className="App">
       <div className="container">
         {" "}
-        <Weather />
+        <Weather defaultCity="New York" />
         <footer>
           This project was coded by{" "}
           <a href="https://janischan-portfolio-jc.netlify.app" target="_blank">
