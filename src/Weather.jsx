@@ -6,6 +6,7 @@ import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
+  const [unit, setUnit] = useState("celsius");
   const [weatherData, setWeatherData] = useState({ loaded: false });
   const [city, setCity] = useState(props.defaultCity);
 
@@ -19,8 +20,7 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
       icon: response.data.weather[0].icon,
-      latitude: response.data.coord.lat,
-      longitude: response.data.coord.lon,
+      coordinates: response.data.coord,
     });
   }
 
@@ -63,8 +63,12 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <WeatherInfo data={weatherData} />
-        <WeatherForecast data={weatherData} />
+        <WeatherInfo data={weatherData} unit={unit} setUnit={setUnit} />
+        <WeatherForecast
+          coordinates={weatherData.coordinates}
+          unit={unit}
+          setUnit={setUnit}
+        />
       </div>
     );
   } else {
